@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Automated Inspection - Max Ferguson</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/images/logo_components_color_2x_web_48dp.png">
+    <link rel="stylesheet" href="/assets/manufacturing.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/assets/automated-inspection/index.css">
+    <script src="/ready.js"></script>
+  </head>
+  <body class="mdc-typography">
+    <header class="mdc-toolbar">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <span class="catalog-logo mdc-toolbar__menu-icon">
+            <img src="/images/ic_component_24px_white.svg">
+          </span>
+          <span class="mdc-toolbar__title mdc-toolbar-title catalog-title">
+            <a href="/" title="Home">Max Ferguson</a>
+          </span>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+          <div>
+            <nav id="toolbar-tab-bar" class="mdc-tab-bar custom-tab-bar-in-toolbar mdc-tab-bar-upgraded">
+              <a class="mdc-tab mdc-ripple-upgraded" href="../manufacturing/">Manufacturing</a>
+              <a class="mdc-tab mdc-ripple-upgraded--foreground-activationx mdc-tab--active" href="../automated-inspection/">Automated Inspection</a>
+              <a class="mdc-tab mdc-ripple-upgraded" href="../dynamic-bim/">Dynamic Spatial Models</a>
+              <span class="mdc-tab-bar__indicator"></span>
+            </nav>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="mdc-toolbar-fixed-adjust">
+      <section class="content mdc-layout-grid">
+        <div class="demo-container ">
+          <!--div class="mdc-cell mdc-cell--2-col mdc-cell--hide-tablet mdc-cell--hide-phone"></div-->
+          <div class="demo-content mdc-color--white mdc-shadow--4dp content mdc-color-text--grey-800 mdc-cell mdc-layout-grid__cell--span-12">
+            <h1 class="mdc-typography--headline5">Automatic Localization of Casting Defects</h1>
+            <p class="mdc-typography--body1">
+              In this project, we aim to leverage recent advances in computer vision to create a system for automatic detection of casting defects. We demonstrate that the system can be used to detect defects in a range of other defects in metal materials.
+            </p>
+
+            <div class="mdc-layout-grid">
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-card figure-card mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-shadow--2dp">
+                  <figure class="mdc-card__media">
+                    <img src="images/gdxray-labelled.png" alt="" />
+                  </figure>
+                  <div class="caption">
+                    <p class="mdc-typography--body2 mdc-typography--caption">The output of the defect detection system. In this case, the model returns the coordinates of three bounding boxes containing defects</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h2 class="demo-title mdc-typography--headline6">Architecture</h2>
+            <p class="mdc-typography--body1">
+              The proposed defect detection system is based on the Mask R-CNN architecture [1]. We use the ResNet-101 convolutional neural network to generate a featurized representation of input images. These featurized images are passed into a Region Proposal Network, which selects 300 regions in the image that might contain defects. Each of these regions are analyzed using a separate Region-based Detector. The Region-based Detector returns the class of the defect, as well as the fine-tuned bounding box coordinates. <br>
+            </p>
+
+            <div class="mdc-layout-grid">
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-card figure-card mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-shadow--2dp">
+                  <figure class="mdc-card__media">
+                    <img src="images/gdxray-anchors.png" alt="" />
+                  </figure>
+                  <div class="caption">
+                    <p class="mdc-typography--body2 mdc-typography--caption">A grid of anchors. Each anchor is evaluated by the Region Proposal Network to determine if it is likely to contain a casting defect</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="mdc-typography--body1">
+              The input to the system is a three-dimensional array of image pixels, in RGB. The input image can have any size, but we choose to resize the image to have a maximum side length of 600 px. The output is a list of bounding box coordinates.
+            </p>
+
+
+            <h2 class="demo-title mdc-typography--headline6">Dataset</h2>
+            <p class="mdc-typography--body1">
+              We train and test the Faster R-CNN model using the images
+              from the GDXray Castings dataset. Images are scaled to 600
+              pixels on the shorter edge. Additionally, we randomly flip the
+              images horizontally at training time. This data augmentation
+              technique is applied to artificially increase the size of the
+              training dataset. We do not apply any other form of
+              preprocessing to the images at training or testing time.
+            </p>
+
+            <h2 class="demo-title mdc-typography--headline6">Paper</h2>
+            <img src="images/paper.png" style="width: 90%;"></img>
+            <p class="mdc-typography--body1">
+              Automatic Localization of Casting Defects using Convolutional Neural Networks <br>
+              M. Ferguson, R. Ak, Y. T. Tina Lee, K. H. Law <br>
+              <a href="http://eil.stanford.edu/publications/max_ferguson/IEEE_Casting_Defect_Detection_2017.pdf" title="IEEE Paper">[Paper]</a>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/assets/material-components-web.js" async></script>
+    <script>
+      demoReady(function() {
+        var btns = document.querySelectorAll('.mdc-button:not([data-demo-no-js])');
+        for (var i = 0, btn; btn = btns[i]; i++) {
+          mdc.ripple.MDCRipple.attachTo(btn);
+        }
+
+        document.getElementById('toggle-disabled').addEventListener('change', function() {
+          var isDisabled = this.checked;
+          [].forEach.call(document.querySelectorAll('button'), function(button) {
+            button.disabled = isDisabled;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

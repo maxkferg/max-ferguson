@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dynamic Spatial Models - Max Ferguson</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/images/logo_components_color_2x_web_48dp.png">
+    <link rel="stylesheet" href="/assets/manufacturing.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/assets/dynamic-bim/index.css">
+    <script src="/ready.js"></script>
+  </head>
+  <body class="mdc-typography">
+    <header class="mdc-toolbar">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <span class="catalog-logo mdc-toolbar__menu-icon">
+            <img src="/images/ic_component_24px_white.svg">
+          </span>
+          <span class="mdc-toolbar__title mdc-toolbar-title catalog-title">
+            <a href="/" title="Home">Max Ferguson</a>
+          </span>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+          <div>
+            <nav id="toolbar-tab-bar" class="mdc-tab-bar custom-tab-bar-in-toolbar mdc-tab-bar-upgraded">
+              <a class="mdc-tab mdc-ripple-upgraded" href="../manufacturing/">Manufacturing</a>
+              <a class="mdc-tab mdc-ripple-upgraded" href="../automated-inspection/">Automated Inspection</a>
+              <a class="mdc-tab mdc-ripple-upgraded--foreground-activation mdc-tab--active" href="../dynamic-bim/">Dynamic Spatial Models</a>
+              <span class="mdc-tab-bar__indicator"></span>
+            </nav>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="mdc-toolbar-fixed-adjust">
+      <section class="content mdc-layout-grid">
+        <div class="demo-container ">
+          <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+          <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800">
+            <h1 class="mdc-typography--headline5">Facilitating Dynamic Building Information Models with Mobile Robots</h1>
+              <p class="mdc-typography--body1">
+                Automation in construction and facility management could significantly improve efficiency and productivity throughout the lifecycle of modern facilities. However, for robots and autonomous systems to operate in effectively in dynamic and unstructured environments such as a construction sites, they must be able to infer or obtain a semantic model of the environment.
+              </p>
+              <p class="mdc-typography--body1">
+                Previous efforts in Civil Engineering and Robotics have focused on developing static maps of the environment, often neglecting the possibility that objects can be moved. This project investigates how information from mobile robots can be used to dynamically update an existing model of the building environment with semantic-rich information. A new object-detection-first (ODF) computer vision algorithm is developed to track and localize common building site objects. Additional algorithms are proposed for merging and removing objects from the building information model. The proposed system is validated using data collected with a purpose-built mobile robot.
+              </p>
+
+              <!-- Figure 1 -->
+              <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-card figure-card mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-shadow--2dp">
+                    <figure class="mdc-card__media">
+                      <img src="images/banner-title.png" alt="" />
+                    </figure>
+                    <div class="caption">
+                      <p class="mdc-typography--body2 mdc-typography--caption">Data is collected using a SLAM-enabled mobile robot with RGB-D sensors. Images from the mobile robot vision system is analysed with our ODF computer vision algorithm. Objects are added and removed from the building information model in real-time</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <h2 class="demo-title mdc-typography--headline6">Framework</h2>
+              <p class="mdc-typography--body1">
+                We start by proposing a generic framework for updating building information models using mobile robots. In this framework, each mobile robot obtains information about its environment using a combination of LiDAR and RGB-D cameras. An object recognition algorithm is used to detect objects in the field-of-view of the mobile robot and determine the position of each object relative to the mobile robot. The global position of the mobile robot is estimated using a localization algorithm such as Adaptive Monte Carlo Localization (AMCL) or Continuous-Time SLAM. An object tracking and global object localization layer estimates the global positions of detected objects, and filters false-positive detections. Information is broadcasted to the building information model where is used to dynamically update the model.
+              </p>
+
+              <!-- Figure 2: Theoretical framework -->
+              <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-card figure-card mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-shadow--2dp">
+                    <figure class="mdc-card__media">
+                      <img src="images/framework.png" alt="The theoretical framework" />
+                    </figure>
+                    <div class="caption">
+                      <p class="mdc-typography--body2 mdc-typography--caption">The proposed computational framework</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <h2 class="demo-title mdc-typography--headline6">Object-Detection-First Computer Vision Algorithm</h2>
+              <p class="mdc-typography--body1">
+                The core component of the proposed system is a computer vision algorithm capable of classifying and localizing objects of interest in images captured by a camera on the mobile robot. Inspired by the recent progress in 2D instance segmentation, an  object-detection-first system is developed, where objects are first identified in 2D images, before their size and location is estimated. To maximize detection accuracy, the system is based on the Mask R-CNN architecture, which has obtained state-of-the-art accuracy in a number of instance segmentation challenges [21]. Mask R-CNN consists of three stages. The first stage, called a Region Proposal Network (RPN), proposes candidate object bounding boxes. The second stage, performs classification, bounding-box regression, and instance segmentation in on selected regions of the image. The second stage is extended to predict the three&#8208;dimensional size of objects as well as the color of the object in the absence of shadows.
+              </p>
+
+              <!-- Figure 3: Neural Network -->
+              <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-card figure-card mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-shadow--2dp">
+                    <figure class="mdc-card__media">
+                      <img src="images/neural-network-head.png" alt="The theoretical framework" />
+                    </figure>
+                    <div class="caption">
+                      <p class="mdc-typography--body2 mdc-typography--caption">Head architecture of the proposed defect detection network. Numbers denote spatial resolution and channels. Arrows denote either convolution, deconvolution, or fully connected layers as can be inferred from context (convolution preserves spatial dimension while deconvolution increases it). All convolution layers are 3×3, except the output convolution layer which is 1×1. Deconvolution layers are 2×2 with stride 2. The ReLU activation function is used in hidden layers.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="mdc-typography--body1">
+                The input to the system is a three&#8208;dimensional array of image pixels,
+                in RGB. The input image can have any size, but we choose to resize
+                the image to have a maximum side length of 600 px. The output is a
+                list of bounding box coordinates.
+              </p>
+              <p class="mdc-typography--body1">
+              <b>Size Estimation</b> is integrated into the ODF prediction stage [expand]
+                [Loss function]
+              </p>
+
+              <p class="mdc-typography--body1">
+                <b>Color Estimation</b> is integrated into the ODF prediction stage [expand]
+                [Loss function]
+              </p>
+
+              <p class="mdc-typography--body1">
+                <b>Position Estimation</b> is undertaken using the depth image and the predicted mask. The approximate position of each foreground object is calculated using depth information from the RGB-D camera. Z<sub>camera</sub> is estimated by averaging the depth measurements across the area within the segmentation mask.  The position of the object can be estimated using the pinhole camera model:
+
+                  [Equations]
+
+                  where <i>f</i> is the focal length of the camera and (x<sub>com</sub>, y<sub>com</sub>) is the center of mass of the mask in pixel coordinates.
+              </p>
+
+              <!-- Figure 4: Depth Masks -->
+              <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-card figure-card mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-shadow--2dp">
+                    <figure class="mdc-card__media">
+                      <img src="images/depth-masks.png" alt="Depth Masks" />
+                    </figure>
+                    <div class="caption">
+                      <p class="mdc-typography--body2 mdc-typography--caption">The approximate position of each foreground object is calculated using depth information from the RGB-D camera.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="mdc-typography--body1">
+                <b>Operational system</b> is trialled in a modern facility
+              </p>
+
+              <!-- Figure 6: Depth Masks -->
+              <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-card figure-card mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-shadow--2dp">
+                    <figure class="mdl-card__media">
+                    <div class="content-grid mdl-grid">
+                      <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-shadow--2dp">
+                        <video controls autoplay height="350">
+                          <source src="videos/rgb.webm">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                      <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-shadow--2dp">
+                        <video controls autoplay height="350">
+                          <source src="videos/depth.webm">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                      <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-shadow--2dp">
+                        <video controls autoplay height="350">
+                          <source src="videos/sim.webm">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                      <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--12-col-tablet mdl-shadow--2dp">
+                        <video controls autoplay height="350">
+                          <source src="videos/localization.mov">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </figure>
+                    <div class="caption">
+                      <p class="mdc-typography--body2 mdc-typography--caption">Mobile robot recognizing objects</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h2 class="demo-title mdc-typography--headline6">Object Association and Tracking</h2>
+                <p class="mdc-typography--body1">
+                 In general, it is inappropriate to directly update a building information model using predictions from an object detector, as false detections tend to occur with a non-trivial probability. To overcome this issue, a Kalman filter is used to track the position of objects across successive camera frames. The Kalman filter has the following important features that the proposed system can benefit from:
+                </p>
+                <ul class="mdc-typography--body1">
+                  <li>Correction of the predicted position based on new measurements</li>
+                  <li>Reduction of false-positive detections introduced by the object detector</li>
+                  <li>Association of multiple objects to their tracks</li>
+                </ul>
+                <p class="mdc-typography--body1">
+                Objects are currently tracked in the image coordinate system. Future work will investigate tracking objects a global three dimensional coordinate system. The Kalman filter is initialized using a constant velocity model.
+                </p>
+
+              <!-- Figure 6: <! Association -->
+              <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-card figure-card mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-shadow--2dp">
+                    <figure class="mdc-card__media">
+                      <img src="images/association.png" alt="The theoretical framework" />
+                    </figure>
+                    <div class="caption">
+                      <p class="mdc-typography--body2 mdc-typography--caption">
+                        Associate of detections to tracks
+                    </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <h2 class="demo-title mdc-typography--headline6">Mobile Robot</h2>
+              <p class="mdc-typography--body1">
+                A mobile robot is designed and constructed to test the proposed algorithms. The mobile robot is based on the A4WD1 rover platform from Lynxmotion. An NVIDIA TX2 computer is fitted to the robot for data processing and recording. The mobile robot is also fitted with a Zed RGB-D camera for collection of RGB-D images. A RPLIDAR A2 horizontal laser scanner is mounted on the mobile robot for collecting laser scan data.
+              </p>
+
+              <!-- Figure 7: <! Mobile Robot -->
+              <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-card figure-card mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-shadow--2dp">
+                    <figure class="mdc-card__media">
+                      <img src="images/mobile-robot.png" alt="The theoretical framework" />
+                    </figure>
+                    <div class="caption">
+                      <p class="mdc-typography--body2 mdc-typography--caption">
+                        A mobile robot is designed and constructed to test the proposed algorithms. The mobile robot is based on the A4WD1 rover platform from Lynxmotion. An NVIDIA TX2 computer is fitted to the robot for data processing and recording. The mobile robot is also fitted with a Zed RGB-D camera for collection of RGB-D images. A RPLIDAR A2 horizontal laser scanner is mounted on the mobile robot for collecting laser scan data.
+                    </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="mdc-typography--body1">
+                The global position of the mobile robot within the building is constantly estimated using an advanced simultaneous localization and mapping (SLAM) algorithm [4]. The RPLIDAR sensor is used to provide laser scan data for SLAM at approximately 10 Hz, and the Zed RGB-D camera is used to provide visual odometry for SLAM at 60 Hz. An initial map of the building is created by manually driving the mobile robot around the building, while running the SLAM algorithm.
+              </p>
+                <div class="mdl-card mdl-cell mdl-cell--8-col mdl-cell--4-col-tablet mdl-shadow--2dp">
+
+                <div class="mdl-card__supporting-text">
+                  <p>MOBILE ROBOT SLAMMING</p>
+                </div>
+              </div>
+
+              <!-- Figure 8: Depth Masks -->
+              <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-card figure-card mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-shadow--2dp">
+                    <figure class="mdl-card__media">
+                      <video controls autoplay width="600">
+                        <source src="videos/full-mapping.mov">
+                        Your browser does not support the video tag.
+                      </video>
+                    </figure>
+                    <div class="caption">
+                      <p class="mdc-typography--body2 mdc-typography--caption">Mobile robot localization using SLAM.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <h2 class="demo-title mdc-typography--headline6">Paper</h2>
+            <img src="images/paper.png" style="width: 90%;"></img>
+            <p class="mdc-typography--body1">
+              Facilitating Dynamic Building Information Models with Mobile Robots and Computer Vision <br>
+              M. Ferguson, S. Jeong, K. H. Law <br>
+              <a href="#" title="Automation in Construction Paper">[Paper]</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/assets/material-components-web.js" async></script>
+    <script>
+      demoReady(function() {
+        var btns = document.querySelectorAll('.mdc-button:not([data-demo-no-js])');
+        for (var i = 0, btn; btn = btns[i]; i++) {
+          mdc.ripple.MDCRipple.attachTo(btn);
+        }
+
+        document.getElementById('toggle-disabled').addEventListener('change', function() {
+          var isDisabled = this.checked;
+          [].forEach.call(document.querySelectorAll('button'), function(button) {
+            button.disabled = isDisabled;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
