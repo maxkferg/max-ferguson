@@ -61,9 +61,9 @@ class Globber {
    * <code>
    *   > getChunks({filePathPattern: '**' + '/*.scss'})
    *   < {
-   *       "button": "/absolute/path/to/mdc-web-repo/demos/button.scss",
+   *       "button": "/absolute/path/to/mdc-web-repo/src/button.scss",
    *       ...
-   *       "theme/theme-baseline": "/absolute/path/to/mdc-web-repo/demos/theme/theme-baseline.scss",
+   *       "theme/theme-baseline": "/absolute/path/to/mdc-web-repo/src/theme/theme-baseline.scss",
    *       ...
    *     }
    * </code>

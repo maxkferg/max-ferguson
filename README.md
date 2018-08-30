@@ -8,11 +8,17 @@ Update npm and node. Then:
 npm run dev
 ```
 
+## Deployment
+Update npm and node. Then:
+```sh
+npm run build
+scp -r dist/* maxferg@myth.stanford.edu:WWW
+```
+
+
 ## Useful links (Material Compnent Library)
 
 - [Getting Started Guide](docs/getting-started.md)
-- [All Components](packages/)
-- [Demos](demos/)
 - [Contributing](CONTRIBUTING.md)
 - [Material.io](https://www.material.io) (external site)
 - [Material Design Guidelines](https://material.io/guidelines) (external site)
